@@ -15,10 +15,17 @@ public void draw()
 } 
 public void drawBranches(int x,int y, double branchLength, double angle) 
 {   
-  int endX1,endX2,endY1,endY2;
+ int endX1,endX2,endY1,endY2;
   double angle1 = angle - branchAngle;
   double angle2 = angle + branchAngle;
   branchLength = branchLength*fractionLength;
   endX1 = (int)(branchLength*Math.cos(angle1) + x);
   endY1 = (int)(branchLength*Math.sin(angle1) + y);
+  endX2 = (int)(branchLength*Math.cos(angle2) + x);
+  endY2= (int)(branchLength*Math.sin(angle2) + y);
+  line(x,y,endX1,endY1);
+  line(x,y,endX2,endY2);
+  if (branchLength > smallestBranch) {
+    drawBranches(endX1,endY1,branchLength+2,angle1);
+    drawBranches(endX2,endY2,branchLength+2,angle2);
 } 
